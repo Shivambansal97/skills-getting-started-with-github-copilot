@@ -38,6 +38,42 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Basketball Team": {
+        "description": "Join the basketball team for training and interschool matches",
+        "schedule": "Mondays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 15,
+        "participants": ["maria@mergington.edu"]
+    },
+    "Swimming Club": {
+        "description": "Practice swimming techniques and prepare for swim meets",
+        "schedule": "Wednesdays, 3:00 PM - 4:30 PM",
+        "max_participants": 20,
+        "participants": ["logan@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Explore drawing, painting, and mixed-media art projects",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": ["ava@mergington.edu"]
+    },
+    "Drama Society": {
+        "description": "Rehearse plays, develop acting skills, and stage performances",
+        "schedule": "Fridays, 4:00 PM - 6:00 PM",
+        "max_participants": 20,
+        "participants": ["nina@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Practice public speaking, research topics, and compete in debates",
+        "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": ["ethan@mergington.edu"]
+    },
+    "Book Club": {
+        "description": "Read and discuss literature, nonfiction, and current topics",
+        "schedule": "Thursdays, 3:30 PM - 4:30 PM",
+        "max_participants": 14,
+        "participants": ["zoe@mergington.edu"]
     }
 }
 
@@ -61,6 +97,11 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+
 
     # Add student
     activity["participants"].append(email)
